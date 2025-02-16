@@ -2,6 +2,7 @@
 <strong>Topic: {{topic.text}}</strong>
 <br />
 <p>Entries</p>
+<a href="{% url "learning_logs:new_entry" topic.id %}">Add new entry</a>
 {% for entry in entries %}
 <p>{{entry.date_created|date:'M d, Y H:i'}}</p>
 <p>{{entry.text|linebreaks}}</p>
