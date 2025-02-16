@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from learning_logs.forms import EntryForm, TopicForm
-from learning_logs.models import Topic
+from learning_logs.models import Entry, Topic
 
 # Create your views here.
 def index(request):
@@ -45,3 +45,15 @@ def new_entry(request, topic_id):
     context = {'form': form, 'topic': topic}
     return render(request, 'learning_logs/new_entry.html', context)
     
+def edit_entry(request, topic_id, entry_id):
+    entry = Entry.objects.get(id=entry_id)
+
+    if request.method != 'POST':
+        form = EntryForm(instance=entry)
+    else:
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('learning_logs:topic', topic_id=topic_id)
+    context = {'form': form, 'entry': entry}
+    return render(request, 'learning_logs/edit_entry.html', context)

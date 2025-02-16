@@ -12,4 +12,5 @@ urlpatterns = [
     path('topics/add_new', views.new_topic, name='new_topic'),
     path('topic/<int:topic_id>', views.topic, name='topic'),
     path('topic/<int:topic_id>/add_entry', views.new_entry, name='new_entry'),
+    path('topic/<int:topic_id>/edit_entry/<int:entry_id>', views.edit_entry, name='edit_entry'),
 ]

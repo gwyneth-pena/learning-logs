@@ -6,6 +6,7 @@
 {% for entry in entries %}
 <p>{{entry.date_created|date:'M d, Y H:i'}}</p>
 <p>{{entry.text|linebreaks}}</p>
+<a href="{% url "learning_logs:edit_entry" topic.id entry.id %}">Edit entry</a>
 {% empty %}
 <p>No data.</p>
 {% endfor %} {% endblock content %}
