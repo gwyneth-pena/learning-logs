@@ -1,12 +1,38 @@
-{% extends "learning_logs/base.html" %} {% block content %}
-<strong>Topic: {{topic.text}}</strong>
-<br />
-<p>Entries</p>
-<a href="{% url "learning_logs:new_entry" topic.id %}">Add new entry</a>
-{% for entry in entries %}
-<p>{{entry.date_created|date:'M d, Y H:i'}}</p>
-<p>{{entry.text|linebreaks}}</p>
-<a href="{% url "learning_logs:edit_entry" topic.id entry.id %}">Edit entry</a>
-{% empty %}
-<p>No data.</p>
-{% endfor %} {% endblock content %}
+{% extends "learning_logs/base.html" %} 
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 bg-success bg-gradient text-white py-4 px-2 px-md-5 mb-2">
+        <h3>Entries</h3>
+        <p>Below are the entries that you've written in relation to the topic <strong>{{ topic.text }}</strong>.</p>
+        <a class="btn btn-light text-success fw-bold" href="{% url 'learning_logs:new_entry' topic.id %}">+ Add new entry</a>
+    </div>
+    <div class="col-12 mx-0 px-0 mb-4">
+        <a class="text-success fw-bold" href="{% url 'learning_logs:topics' %}">Go back to topics</a>
+    </div>
+    <div class="col-12 px-0 mx-0">
+      {% for entry in entries %}
+        <ul class="list-unstyled">
+          <li>
+            <div class="card text-decoration-none px-3 py-4">
+              <div class="card-body">
+                <p class="text-dark my-0 py-0 fw-bold">{{ entry.date_created | date:'M d, Y' }}</p>
+                <hr>
+                <p>{{ entry.text | linebreaks }}</p>
+                <a href="{% url 'learning_logs:edit_entry' topic.id entry.id %}">Edit</a>
+                | <a class="text-danger" href="{% url 'learning_logs:delete_entry' topic.id entry.id %}">Delete</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      {% empty %}
+        <a class="card text-decoration-none" href="{% url 'learning_logs:topic' topic.id %}">
+          <div class="card-body border-start border-success border-5">
+            <p class="text-decoration-none text-dark my-0 py-0 fw-bold">There's no written entries yet.</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,11 +1,31 @@
-{% extends "learning_logs/base.html" %} {% block content %}
-<h2>Topics</h2> 
-<br>
-<a href="{% url "learning_logs:new_topic" %}">Add new topic</a>
-{% for topic in topics %}
-<ul>
-  <li><a href={% url 'learning_logs:topic' topic.id%}>{{topic.text}}<a/></li>
-</ul>
-{% empty %}
-<p>No data.</p>
-{% endfor %} {% endblock content %}
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 bg-success bg-gradient text-white py-4 px-2 px-md-5 mb-5">
+        <h3>Topics</h3>
+        <p>Below are the topics that you have shown interest in, where you can explore and dive deeper into areas that align with your learning goals and passions.</p>
+        <a class="btn btn-light text-success fw-bold" href="{% url 'learning_logs:new_topic' %}">+ Add new topic</a>
+    </div>
+    <div class="col-12 px-0 mx-0">
+      {% for topic in topics %}
+        <ul class='list-unstyled'>
+          <li>
+            <a class="card text-decoration-none" href={% url 'learning_logs:topic' topic.id%}>
+              <div class="card-body border-start border-success border-5">
+                <p class='text-decoration-none text-dark my-0 py-0 fw-bold'>{{topic.text}}</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      {% empty %}
+        <a class="card text-decoration-none" href={% url 'learning_logs:topic' topic.id%}>
+          <div class="card-body border-start border-success border-5">
+            <p class='text-decoration-none text-dark my-0 py-0 fw-bold'>No topic/s added.</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}
