@@ -3,7 +3,7 @@
     {
       "src": "learning_logs_proj/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.5" }
     }
   ],
   "routes": [
