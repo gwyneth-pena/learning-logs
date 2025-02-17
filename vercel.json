@@ -1,0 +1,15 @@
+{
+  "builds": [
+    {
+      "src": "learning_logs_proj/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.8.10" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "learning_logs_proj/wsgi.py"
+    }
+  ]
+}
